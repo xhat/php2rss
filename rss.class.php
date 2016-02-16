@@ -1,35 +1,21 @@
 <?php
-/**
- +------------------------------------------------------------------------------
- * PHP2RSS
- +------------------------------------------------------------------------------
- */
 class RSS
 {
     /**
      +----------------------------------------------------------
      * RSS频道名
      +----------------------------------------------------------
-     * @var string
-     * @access protected
-     +----------------------------------------------------------
      */
-    protected $channel_title = "';
+    protected $channel_title = '';
     /**
      +----------------------------------------------------------
      * RSS频道链接
      +----------------------------------------------------------
-     * @var string
-     * @access protected
-     +----------------------------------------------------------
      */
-    protected $channel_link = "';
+    protected $channel_link = '';
     /**
      +----------------------------------------------------------
      * RSS频道描述
-     +----------------------------------------------------------
-     * @var string
-     * @access protected
      +----------------------------------------------------------
      */
     protected $channel_description = '';
@@ -37,17 +23,11 @@ class RSS
      +----------------------------------------------------------
      * RSS频道使用的小图标的URL
      +----------------------------------------------------------
-     * @var string
-     * @access protected
-     +----------------------------------------------------------
      */
     protected $channel_imgurl = '';
     /**
      +----------------------------------------------------------
      * RSS频道所使用的语言
-     +----------------------------------------------------------
-     * @var string
-     * @access protected
      +----------------------------------------------------------
      */
     protected $language = 'zh_CN';
@@ -55,25 +35,19 @@ class RSS
      +----------------------------------------------------------
      * RSS文档创建日期，默认为今天
      +----------------------------------------------------------
-     * @var string
-     * @access protected
-     +----------------------------------------------------------
      */
     protected $pubDate = '';
     protected $lastBuildDate = '';
- 
+  
     protected $generator = 'YBlog RSS Generator';
- 
+  
     /**
      +----------------------------------------------------------
      * RSS单条信息的数组
      +----------------------------------------------------------
-     * @var string
-     * @access protected
-     +----------------------------------------------------------
      */
     protected $items = array();
- 
+  
     /**
      +----------------------------------------------------------
      * 构造函数
@@ -95,7 +69,7 @@ class RSS
         $this->pubDate = Date('Y-m-d H:i:s', time());
         $this->lastBuildDate = Date('Y-m-d H:i:s', time());
     }
- 
+  
     /**
      +----------------------------------------------------------
      * 设置私有变量
@@ -110,7 +84,7 @@ class RSS
      {
         $this->{$key} = $value;
      }
- 
+  
     /**
      +----------------------------------------------------------
      * 添加RSS项
@@ -127,7 +101,7 @@ class RSS
      {
         $this->items[] = array('title' => $title, 'link' => $link, 'description' => $description, 'pubDate' => $pubDate);
      }
- 
+  
      /**
      +----------------------------------------------------------
      * 输出RSS的XML为字符串
@@ -139,44 +113,44 @@ class RSS
      */
     public function Fetch()
     {
-        $rss = "<?xml version="1.0" encoding="utf-8" ?>rn";
-        $rss = "<rss version="2.0">rn";
-        $rss .= "<channel>rn";
-        $rss .= "<title><![CDATA[{$this->channel_title}]]></title>rn";
-        $rss .= "<description><![CDATA[{$this->channel_description}]]></description>rn";
-        $rss .= "<link>{$this->channel_link}</link>rn";
-        $rss .= "<language>{$this->language}</language>rn";
- 
+        $rss = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n";
+        $rss .= "<rss version=\"2.0\">\r\n";
+        $rss .= "<channel>\r\n";
+        $rss .= "<title><![CDATA[{$this->channel_title}]]></title>\r\n";
+        $rss .= "<description><![CDATA[{$this->channel_description}]]></description>\r\n";
+        $rss .= "<link>{$this->channel_link}</link>\r\n";
+        $rss .= "<language>{$this->language}</language>\r\n";
+  
         if (!empty($this->pubDate))
-            $rss .= "<pubDate>{$this->pubDate}</pubDate>rn";
+            $rss .= "<pubDate>{$this->pubDate}</pubDate>\r\n";
         if (!empty($this->lastBuildDate))
-            $rss .= "<lastBuildDate>{$this->lastBuildDate}</lastBuildDate>rn";
+            $rss .= "<lastBuildDate>{$this->lastBuildDate}</lastBuildDate>\r\n";
         if (!empty($this->generator))
-            $rss .= "<generator>{$this->generator}</generator>rn";
- 
-        $rss .= "<ttl>5</ttl>rn";
- 
+            $rss .= "<generator>{$this->generator}</generator>\r\n";
+  
+        $rss .= "<ttl>5</ttl>\r\n";
+  
         if (!empty($this->channel_imgurl)) {
-            $rss .= "<image>rn";
-            $rss .= "<title><![CDATA[{$this->channel_title}]]></title>rn";
-            $rss .= "<link>{$this->channel_link}</link>rn";
-            $rss .= "<url>{$this->channel_imgurl}</url>rn";
-            $rss .= "</image>rn";
+            $rss .= "<image>\r\n";
+            $rss .= "<title><![CDATA[{$this->channel_title}]]></title>\r\n";
+            $rss .= "<link>{$this->channel_link}</link>\r\n";
+            $rss .= "<url>{$this->channel_imgurl}</url>\r\n";
+            $rss .= "</image>\r\n";
         }
- 
+  
         for ($i = 0; $i < count($this->items); $i++) {
-            $rss .= "<item>rn";
-            $rss .= "<title><![CDATA[{$this->items[$i]['title']}]]></title>rn";
-            $rss .= "<link>{$this->items[$i]['link']}</link>rn";
-            $rss .= "<description><![CDATA[{$this->items[$i]['description']}]]></description>rn";
-            $rss .= "<pubDate>{$this->items[$i]['pubDate']}</pubDate>rn";
-            $rss .= "</item>rn";
+            $rss .= "<item>\r\n";
+            $rss .= "<title><![CDATA[{$this->items[$i]['title']}]]></title>\r\n";
+            $rss .= "<link>{$this->items[$i]['link']}</link>\r\n";
+            $rss .= "<description><![CDATA[{$this->items[$i]['description']}]]></description>\r\n";
+            $rss .= "<pubDate>{$this->items[$i]['pubDate']}</pubDate>\r\n";
+            $rss .= "</item>\r\n";
         }
- 
-        $rss .= "</channel>rn</rss>";
+  
+        $rss .= "</channel>\r\n</rss>";
         return $rss;
     }
- 
+  
     /**
      +----------------------------------------------------------
      * 输出RSS的XML到浏览器
@@ -193,5 +167,3 @@ class RSS
         exit;
     }
 }
-
-?>
